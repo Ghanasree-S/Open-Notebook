@@ -251,6 +251,8 @@ async def get_provider_availability():
                 or _check_openai_compatible_support("STT")
                 or _check_openai_compatible_support("TTS")
             ),
+            # Sarvam AI - Indian language TTS provider
+            "sarvam": os.environ.get("SARVAM_API_KEY") is not None,
         }
         
         available_providers = [k for k, v in provider_status.items() if v]
@@ -284,6 +286,10 @@ async def get_provider_availability():
                     if model_type in esperanto_available and provider in esperanto_available[model_type]:
                         if _check_azure_support(mode):
                             supported_types[provider].append(model_type)
+            # Special handling for Sarvam - custom TTS provider
+            elif provider == "sarvam":
+                # Sarvam only supports TTS
+                supported_types[provider] = ["text_to_speech"]
             else:
                 # Standard provider detection
                 for model_type, providers in esperanto_available.items():

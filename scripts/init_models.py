@@ -58,6 +58,17 @@ async def init_models():
             "provider": "groq",
             "type": "speech_to_text",
         },
+        # Sarvam TTS models (Indian languages)
+        {
+            "name": "bulbul:v2",
+            "provider": "sarvam",
+            "type": "text_to_speech",
+        },
+        {
+            "name": "bulbul:v3-beta",
+            "provider": "sarvam",
+            "type": "text_to_speech",
+        },
     ]
     
     for model in models:
